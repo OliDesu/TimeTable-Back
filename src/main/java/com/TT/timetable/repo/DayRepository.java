@@ -11,6 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface  DayRepository extends JpaRepository<Day,Long> {
-    @Query("SELECT e FROM Day d WHERE d.date = CURDATE()")
+    @Query("SELECT d FROM Day d WHERE DATE(d.dayDate) = CURRENT_DATE ")
     Day findDayByDate();
 }

@@ -11,14 +11,14 @@ public class Day {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date date;
+    private Date dayDate;
 
-    @OneToMany(mappedBy = "day", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "dayId", cascade = CascadeType.ALL)
     private List<Slot> slots;
 
-    public Day(Long id, Date date, List<Slot> slots) {
+    public Day(Long id, Date dayDate, List<Slot> slots) {
         this.id = id;
-        this.date = date;
+        this.dayDate = dayDate;
         this.slots = slots;
     }
 
@@ -34,12 +34,12 @@ public class Day {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDayDate() {
+        return dayDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDayDate(Date date) {
+        this.dayDate = date;
     }
 
     public List<Slot> getSlots() {

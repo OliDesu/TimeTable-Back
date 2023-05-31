@@ -1,6 +1,6 @@
 package com.TT.timetable.controller;
 
-import com.TT.timetable.dtos.DayDTO;
+
 import com.TT.timetable.entities.Day;
 import com.TT.timetable.services.DayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class DayController {
     }
 
     @PostMapping
-    public Day saveDay(@RequestBody DayDTO dayDTO){
-    return dayService.saveDay(dayDTO);
+    public Day saveDay(@RequestBody Day Day){
+    return dayService.saveDay(Day);
     }
 }
