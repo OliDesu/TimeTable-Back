@@ -11,16 +11,6 @@ public class Slot {
     private String  startTime ;
     private String endTime;
     private String activity;
-    @ManyToOne
-    private Day dayId;
-
-    public Day getDayId() {
-        return dayId;
-    }
-
-    public void setDayId(Day dayId) {
-        this.dayId = dayId;
-    }
 
     public Slot(Long id, String startTime, String endTime, String activity) {
         this.id = id;
@@ -31,6 +21,16 @@ public class Slot {
 
     public Slot() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "Slot{" +
+                "id=" + id +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", activity='" + activity + '\'' +
+                '}';
     }
 
     public Long getId() {

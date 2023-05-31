@@ -9,6 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @RestController
 @RequestMapping("/day")
 public class DayController {
@@ -22,16 +27,13 @@ public class DayController {
     @GetMapping("/get")
     public ResponseEntity<Day> getDay() {
         Day currentDay = dayService.getCurrentDay();
+        System.out.println(currentDay);
         return new ResponseEntity<>(currentDay, HttpStatus.OK);
     }
 
     @PostMapping("/set")
-    public ResponseEntity<Day> saveDay(@RequestBody DayDTO dayDTO) {
-        System.out.println("LAZBEAIZEAOIEAZEIUAZH");
-        Day day1 = new Day((long)dayDTO.getId(),dayDTO.getDayDate(),dayDTO.getSlots().stream().map(slotDTO -> {
-             return new Slot((long) slotDTO.getId(), slotDTO.getStartTime(), slotDTO.getEndTime(),slotDTO.getActivity());
-        }).toList());
-        Day savedDay = dayService.saveDay(day1);
-        return new ResponseEntity<>(savedDay, HttpStatus.CREATED);
+    public ResponseEntity<DayDTO> saveDay(@RequestBody DayDTO dayDTO) throws ParseException {
+        this.dayService.saveDay(dayDTO);
+       return new ResponseEntity<>(dayDTO,HttpStatus.OK);
     }
 }
