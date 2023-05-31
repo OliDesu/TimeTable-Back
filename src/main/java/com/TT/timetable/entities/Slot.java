@@ -9,13 +9,29 @@ public class Slot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String  startTime ;
-    private String endTime;
     private String activity;
+    @ManyToOne
+    @JoinColumn(name ="idDay")
+    private Day day;
 
-    public Slot(Long id, String startTime, String endTime, String activity) {
+    public Day getDay() {
+        return day;
+    }
+
+    public void setDay(Day day) {
+        this.day = day;
+    }
+
+    public Slot(Long id, String startTime, String activity, Day day) {
         this.id = id;
         this.startTime = startTime;
-        this.endTime = endTime;
+        this.activity = activity;
+        this.day = day;
+    }
+
+    public Slot(Long id, String startTime, String activity) {
+        this.id = id;
+        this.startTime = startTime;
         this.activity = activity;
     }
 
@@ -28,7 +44,6 @@ public class Slot {
         return "Slot{" +
                 "id=" + id +
                 ", startTime='" + startTime + '\'' +
-                ", endTime='" + endTime + '\'' +
                 ", activity='" + activity + '\'' +
                 '}';
     }
@@ -48,15 +63,6 @@ public class Slot {
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
     public String getActivity() {
         return activity;
     }

@@ -45,18 +45,25 @@ public Day saveDay(DayDTO dayDTO) throws ParseException {
     if (existingDay != null) {
         // Update existing day
         existingDay.setSlots(dayDTO.getSlots().stream()
-                .map(slotDTO -> new Slot((long) slotDTO.getId(), slotDTO.getStartTime(), slotDTO.getEndTime(), slotDTO.getActivity()))
+                .map(slotDTO -> new Slot((long) slotDTO.getId(), slotDTO.getStartTime(),  slotDTO.getActivity()))
                 .toList());
-        System.out.println("LE JOUR UPDATED "+ existingDay.toString());
-        Day updatedDay = this.dayRepository.save(existingDay);
-        return updatedDay;
+
+        for (Slot slot : existingDay.getSlots()) {
+            System.out.println("SLOT "+ slot.getId()+"ACTIVITY"+slot.getActivity());
+
+        }
+        this.dayRepository.save(existingDay);
+        return null;
     } else {
         System.out.println();
         // Create new day
         Day newDay = new Day((long) dayDTO.getId(), dayDate, dayDTO.getSlots().stream()
-                .map(slotDTO -> new Slot((long) slotDTO.getId(), slotDTO.getStartTime(), slotDTO.getEndTime(), slotDTO.getActivity()))
+                .map(slotDTO -> new Slot((long) slotDTO.getId(), slotDTO.getStartTime(), slotDTO.getActivity()))
                 .toList());
+        for (Slot slot : newDay.getSlots()) {
+            System.out.println("SLOT "+ slot.getId()+"ACTIVITY"+slot.getActivity());
 
+        }
         Day savedDay = this.dayRepository.save(newDay);
         return savedDay;
     }

@@ -3,17 +3,15 @@ package com.TT.timetable.dtos;
 public class SlotDTO {
     private int id;
     private String startTime;
-    private String endTime;
     private int dayId;
     private String activity;
 
     public SlotDTO() {
     }
 
-    public SlotDTO(int id, String startTime, String endTime, int dayId, String activity) {
+    public SlotDTO(int id, String startTime,  int dayId, String activity) {
         this.id = id;
         this.startTime = startTime;
-        this.endTime = endTime;
         this.dayId = dayId;
         this.activity = activity;
     }
@@ -32,14 +30,6 @@ public class SlotDTO {
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
     }
 
     public int getDayId() {
