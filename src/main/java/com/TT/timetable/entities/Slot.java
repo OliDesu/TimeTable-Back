@@ -11,7 +11,7 @@ public class Slot {
     private String  startTime ;
     private String activity;
     @ManyToOne
-    @JoinColumn(name ="idDay")
+    @JoinColumn(name ="day_id")
     private Day day;
 
     public Day getDay() {

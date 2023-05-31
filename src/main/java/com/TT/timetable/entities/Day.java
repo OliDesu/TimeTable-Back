@@ -13,7 +13,7 @@ public class Day {
     private Long id;
     private Date dayDate;
 
-    @OneToMany( cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
     @JoinColumn(name = "day_id")
     private List<Slot> slots;
 
@@ -57,6 +57,9 @@ public class Day {
     }
 
     public void setSlots(List<Slot> slots) {
-        this.slots = slots;
+        this.slots.clear();
+        if(slots != null){
+            this.slots.addAll(slots);
+        }
     }
 }
