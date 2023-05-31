@@ -28,10 +28,7 @@ public class Day {
         return "Day{" +
                 "id=" + id +
                 ", dayDate=" + dayDate +
-                ", slots=" + slots.stream().map(slot -> {
-                    System.out.println(slot.toString());
-            return null;
-        }) +
+                ", slots=" + slots +
                 '}';
     }
 
