@@ -25,10 +25,9 @@ public class DayController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<Day> getDay() {
+    public ResponseEntity<Day> getDay() throws ParseException {
         Day currentDay = dayService.getCurrentDay();
-        System.out.println(currentDay);
-        return new ResponseEntity<>(currentDay, HttpStatus.OK);
+        return  new ResponseEntity<>(currentDay,HttpStatus.OK);
     }
 
     @PostMapping("/set")

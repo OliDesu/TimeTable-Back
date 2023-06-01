@@ -1,5 +1,7 @@
 package com.TT.timetable.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -13,6 +15,7 @@ public class Day {
     private Long id;
     private Date dayDate;
 
+    @JsonManagedReference
     @OneToMany( cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
     @JoinColumn(name = "day_id")
     private List<Slot> slots;

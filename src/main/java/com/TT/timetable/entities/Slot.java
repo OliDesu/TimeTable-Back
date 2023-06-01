@@ -1,5 +1,6 @@
 package com.TT.timetable.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +12,7 @@ public class Slot {
     private String  startTime ;
     private String activity;
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name ="day_id")
     private Day day;
 
