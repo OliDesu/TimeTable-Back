@@ -15,7 +15,7 @@ public class Day {
     private Long id;
     private Date dayDate;
 
-    @JsonManagedReference
+
     @OneToMany( cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
     @JoinColumn(name = "day_id")
     private List<Slot> slots;
