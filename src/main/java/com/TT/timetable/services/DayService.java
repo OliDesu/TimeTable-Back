@@ -3,22 +3,15 @@ package com.TT.timetable.services;
 import com.TT.timetable.dtos.DayDTO;
 import com.TT.timetable.entities.Day;
 
-import com.TT.timetable.entities.Slot;
 import com.TT.timetable.repo.DayRepository;
-import com.TT.timetable.repo.SlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
 
-
+/*
 @Service
 public class DayService {
     private final DayRepository dayRepository;
@@ -54,14 +47,7 @@ public Day saveDay(DayDTO dayDTO) throws ParseException {
         List<Slot> newSlots = new ArrayList<>();
         dayDTO.getSlots().forEach(slotDTO -> newSlots.add(new Slot((long) slotDTO.getId(), slotDTO.getStartTime(),  slotDTO.getActivity(),existingDay)));
         // Update existing day
-        /*
-        existingDay.setSlots(dayDTO.getSlots().stream()
-                .map(slotDTO -> new Slot((long) slotDTO.getId(), slotDTO.getStartTime(),  slotDTO.getActivity()))
-                .toList());
 
-        for (Slot slot : existingDay.getSlots()) {
-            existingDay.setSlots();
-        } */
         System.out.println("EXISTING");
         existingDay.setSlots(newSlots);
         return this.dayRepository.save(existingDay);
@@ -84,5 +70,36 @@ public Day saveDay(DayDTO dayDTO) throws ParseException {
     public Day getDayByDate(Date dayDate) {
     Day d = this.dayRepository.getDayByDate(dayDate);
     return d;
+    }
+} */
+
+@Service
+public class DayService {
+    @Autowired
+    private DayRepository dayRepository;
+
+    public Day saveDayWithSlots(DayDTO dayDTO) {
+
+        Day day = new Day((long)dayDTO.getId(),this.convertToLocalDateViaInstant(dayDTO.getDate()),dayDTO.getSlots());
+        Day existingDay = this.dayRepository.findByDate(day.getDate());
+        if(existingDay != null){
+            existingDay.setSlots(day.getSlots());
+            return dayRepository.save(existingDay);
+        }
+        else{
+            return dayRepository.save(day);
+        }
+
+    }
+
+    public Day getCurrentDay() {
+        LocalDate today = LocalDate.now();
+        return dayRepository.findByDate(today);
+    }
+
+    public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 }

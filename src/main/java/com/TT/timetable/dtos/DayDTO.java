@@ -1,19 +1,21 @@
 package com.TT.timetable.dtos;
 
+import com.TT.timetable.entities.Slot;
+
 import java.util.Date;
 import java.util.List;
 
 public class DayDTO {
     private int id;
-    private Date dayDate;
-    private List<SlotDTO> slots;
+    private Date date;
+    private List<Slot> slots;
 
     public DayDTO() {
     }
 
-    public DayDTO(int id, Date dayDate, List<SlotDTO> slots) {
+    public DayDTO(int id, Date date, List<Slot> slots) {
         this.id = id;
-        this.dayDate = dayDate;
+        this.date = date;
         this.slots = slots;
     }
 
@@ -25,19 +27,19 @@ public class DayDTO {
         this.id = id;
     }
 
-    public Date getDayDate() {
-        return dayDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDayDate(Date dayDate) {
-        this.dayDate = dayDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public List<SlotDTO> getSlots() {
+    public List<Slot> getSlots() {
         return slots;
     }
 
-    public void setSlots(List<SlotDTO> slots) {
+    public void setSlots(List<Slot> slots) {
         this.slots = slots;
     }
 }
