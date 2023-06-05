@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class DayService {
@@ -45,5 +47,23 @@ public class DayService {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
+    }
+
+    public Day getSpecificDay(Date date) {
+        LocalDate newDate = this.convertToLocalDateViaInstant(date);
+        return this.dayRepository.findByDate(newDate);
+
+    }
+
+    public List<Date> getFilledDays() {
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        List<LocalDate> transitLocalDate = this.dayRepository.findAllByDate();
+        List<Date> dates = new ArrayList<>();
+
+        transitLocalDate.forEach(a -> {
+            Date date = Date.from(a.atStartOfDay(defaultZoneId).toInstant());
+            dates.add(date);
+        });
+return dates;
     }
 }

@@ -6,6 +6,9 @@ import com.TT.timetable.services.DayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/day")
@@ -23,5 +26,16 @@ public class DayController {
     @GetMapping("/get")
     public Day getCurrentDay() {
         return dayService.getCurrentDay();
+    }
+
+
+    @GetMapping("/getSpecificDay")
+    public Day getSpecificDay(@RequestBody Date date) {
+        return dayService.getSpecificDay(date);
+    }
+
+    @GetMapping("/getFilledDays")
+    public List<Date> getFilledDays() {
+        return dayService.getFilledDays();
     }
 }
