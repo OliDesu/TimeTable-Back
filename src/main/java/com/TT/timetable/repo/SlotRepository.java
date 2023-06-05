@@ -1,6 +1,5 @@
 package com.TT.timetable.repo;
 
-import com.TT.timetable.entities.Day;
 import com.TT.timetable.entities.Slot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
