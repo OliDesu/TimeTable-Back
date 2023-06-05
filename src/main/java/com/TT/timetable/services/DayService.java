@@ -4,6 +4,7 @@ import com.TT.timetable.dtos.DayDTO;
 import com.TT.timetable.entities.Day;
 
 import com.TT.timetable.repo.DayRepository;
+import com.TT.timetable.repo.SlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,14 +78,19 @@ public Day saveDay(DayDTO dayDTO) throws ParseException {
 public class DayService {
     @Autowired
     private DayRepository dayRepository;
+    @Autowired
+    private SlotRepository slotRepository;
 
     public Day saveDayWithSlots(DayDTO dayDTO) {
 
-        Day day = new Day((long)dayDTO.getId(),this.convertToLocalDateViaInstant(dayDTO.getDate()),dayDTO.getSlots());
+        Day day = new Day(this.convertToLocalDateViaInstant(dayDTO.getDate()),dayDTO.getSlots());
+
         Day existingDay = this.dayRepository.findByDate(day.getDate());
         if(existingDay != null){
             existingDay.setSlots(day.getSlots());
-            return dayRepository.save(existingDay);
+            this.dayRepository.save(existingDay);
+            this.slotRepository.deleteByFkDayIdIsNull();
+            return null;
         }
         else{
             return dayRepository.save(day);
@@ -94,7 +100,9 @@ public class DayService {
 
     public Day getCurrentDay() {
         LocalDate today = LocalDate.now();
-        return dayRepository.findByDate(today);
+        Day d = this.dayRepository.findByDate(today);
+        System.out.println(d.toString());
+        return d;
     }
 
     public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {

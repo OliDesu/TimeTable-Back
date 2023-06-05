@@ -5,14 +5,14 @@ import com.TT.timetable.entities.Slot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-
-public interface SlotRepository  extends JpaRepository<Slot,Long> {
+@Repository
+public interface SlotRepository extends JpaRepository<Slot, Long> {
+    @Transactional
     @Modifying
-    @Query("update Slot s set s.activity = ?1 where s.id = ?2")
-    void updateInfoDay(String activity, Long id );
-    List<Slot> findSlotsByDayId(Long id);
+    @Query("DELETE FROM Slot s WHERE s.dayId IS NULL")
+    void deleteByFkDayIdIsNull();
 
 }

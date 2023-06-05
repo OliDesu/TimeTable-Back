@@ -42,4 +42,13 @@ public class DayDTO {
     public void setSlots(List<Slot> slots) {
         this.slots = slots;
     }
+
+    @Override
+    public String toString() {
+        return "DayDTO{" +
+                "id=" + id +
+                ", date=" + date +
+                ", slots=" + slots +
+                '}';
+    }
 }

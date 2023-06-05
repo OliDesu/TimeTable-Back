@@ -2,7 +2,12 @@ package com.TT.timetable.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Data;
+import org.springframework.transaction.annotation.Transactional;
+
 @Entity
+@Transactional
+@Data
 public class Slot {
 
     @Id
@@ -11,11 +16,8 @@ public class Slot {
     private String startTime;
     private String activity;
 
-    @ManyToOne
-    @JoinColumn(name = "day_id")
-
-    private Day day;
-
+    @Column(name = "fk_day_id")
+    private Long dayId;
     public Slot() {
     }
 
@@ -48,11 +50,13 @@ public class Slot {
         this.activity = activity;
     }
 
-    public Day getDay() {
-        return day;
-    }
 
-    public void setDay(Day day) {
-        this.day = day;
+    @Override
+    public String toString() {
+        return "Slot{" +
+                "id=" + id +
+                ", startTime='" + startTime + '\'' +
+                ", activity='" + activity + '\'' +
+                '}';
     }
 }
