@@ -30,8 +30,9 @@ public class DayController {
 
 
     @GetMapping("/getSpecificDay")
-    public Day getSpecificDay(@RequestBody Date date) {
-        return dayService.getSpecificDay(date);
+    public Day getSpecificDay(@RequestBody DayDTO date) {
+
+        return dayService.getSpecificDay(date.getDate());
     }
 
     @GetMapping("/getFilledDays")
