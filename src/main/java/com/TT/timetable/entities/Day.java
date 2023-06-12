@@ -33,6 +33,9 @@ public class Day {
     @JoinColumn(name = "fk_day_id",referencedColumnName = "day_id")
     private List<Slot> slots = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_day_id",referencedColumnName = "day_id")
+    private List<Gratitude> gratitudes = new ArrayList<>();
     public Day() {
     }
 
@@ -40,6 +43,19 @@ public class Day {
         this.id = id;
         this.date = date;
         this.slots = slots;
+    }
+
+    public Day(LocalDate date, List<Slot> slots, List<Gratitude> gratitudes) {
+        this.date = date;
+        this.slots = slots;
+        this.gratitudes = gratitudes;
+    }
+
+    public Day(Long id, LocalDate date, List<Slot> slots, List<Gratitude> gratitudes) {
+        this.id = id;
+        this.date = date;
+        this.slots = slots;
+        this.gratitudes = gratitudes;
     }
 
     public Day(LocalDate date) {
@@ -69,6 +85,11 @@ public void setSlots(List<Slot> slots){
         this.slots.clear();
         if(slots != null)
             this.slots.addAll(slots);
+}
+public void setGratitudes(List<Gratitude> gratitudes){
+        this.gratitudes.clear();
+        if(slots != null)
+            this.gratitudes.addAll(gratitudes);
 }
 
     @Override

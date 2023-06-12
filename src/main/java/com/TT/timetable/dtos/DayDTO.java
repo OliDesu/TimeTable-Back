@@ -1,5 +1,6 @@
 package com.TT.timetable.dtos;
 
+import com.TT.timetable.entities.Gratitude;
 import com.TT.timetable.entities.Slot;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ public class DayDTO {
     private int id;
     private Date date;
     private List<Slot> slots;
+    private List<Gratitude> gratitudes;
 
     public DayDTO() {
     }
@@ -17,6 +19,21 @@ public class DayDTO {
         this.id = id;
         this.date = date;
         this.slots = slots;
+    }
+
+    public DayDTO(int id, Date date, List<Slot> slots, List<Gratitude> gratitudes) {
+        this.id = id;
+        this.date = date;
+        this.slots = slots;
+        this.gratitudes = gratitudes;
+    }
+
+    public List<Gratitude> getGratitudes() {
+        return gratitudes;
+    }
+
+    public void setGratitudes(List<Gratitude> gratitudes) {
+        this.gratitudes = gratitudes;
     }
 
     public int getId() {
