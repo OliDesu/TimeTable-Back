@@ -21,12 +21,12 @@ public class DayService {
     private SlotRepository slotRepository;
 
     public Day saveDayWithSlots(DayDTO dayDTO) {
-
         Day day = new Day(this.convertToLocalDateViaInstant(dayDTO.getDate()),dayDTO.getSlots());
 
         Day existingDay = this.dayRepository.findByDate(day.getDate());
-        if(existingDay != null){
+        if(existingDay != null ){
             existingDay.setSlots(day.getSlots());
+
             this.dayRepository.save(existingDay);
             this.slotRepository.deleteByFkDayIdIsNull();
             return null;
